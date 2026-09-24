@@ -1,4 +1,3 @@
-import pdfplumber
 
 from flask import Flask, request, render_template, jsonify
 from sklearn.feature_extraction.text import TfidfVectorizer
