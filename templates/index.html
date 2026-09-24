@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LLD Practice Platform</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        select, textarea, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background: #0078d7;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #005a9e;
+        }
+        .results {
+            margin-top: 25px;
+        }
+        .results h3 {
+            color: #0078d7;
+            margin-bottom: 10px;
+        }
+        .results ul {
+            list-style: none;
+            padding: 0;
+        }
+        .results li {
+            background: #f9fbfd;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e0e6ed;
+            font-size: 15px;
+        }
+        .score {
+            font-weight: bold;
+            color: #0078d7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>LLD Practice Platform</h2>
+        <form method="POST">
+            <!-- Problem selection -->
+            <select name="problemId">
+                <option value="1">Parking Lot</option>
+                <option value="2">Elevator</option>
+                <option value="3">Vending Machine</option>
+            </select>
+
+            <!-- Learner submission -->
+            <textarea name="submissionContent" rows="10" placeholder="Paste your LLD design/code here..."></textarea>
+            
+            <button type="submit">Submit Design</button>
+        </form>
+
+        {% if results %}
+<div class="results">
+    <h3>Feedback:</h3>
+    <ul>
+        <li>Score: <span class="score">{{ results.score }}%</span></li>
+        {% for d in results.deterministic %}
+            <li>{{ d }}</li>
+        {% endfor %}
+        <li>{{ results.aiFeedback }}</li>
+    </ul>
+</div>
+{% endif %}
+
+
+        {% if error %}
+        <div style="color: red; font-weight: bold; margin-top: 15px;">
+            ⚠️ {{ error }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
